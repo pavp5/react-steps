@@ -32,7 +32,7 @@ export default function List(props) {
   );
 }
 
-function toDate(date){
+export function toDate(date){
   const [day, month, year] = new String(date).split('.');
   return new Date(`20${year}-${month}-${day}`);
 }

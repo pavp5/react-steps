@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
+import { toDate } from './List';
 
 export default function Form(props) {
   const { workouts, setWorkouts } = props;
@@ -10,9 +11,7 @@ export default function Form(props) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    const regex = /\d{2}\.\d{2}\.\d{2}/;
-
-    if (!regex.test(form.date)) {
+    if (!toDate(form.date).getDay()) {
       const inputDateEl = evt.target.querySelector('.form_date');
       inputDateEl.classList.add('error');
 
@@ -53,7 +52,7 @@ export default function Form(props) {
   return (
     <form className="form" onSubmit={handleSubmit}>
       <label htmlFor="date">Дата (ДД.ММ.ГГ)
-        <input className="form_date" type="text" id="date" name="date" maxLength="9"
+        <input className="form_date" type="text" id="date" name="date" maxLength="8"
           value={form.date} onChange={handleInput} required />
       </label>
       <label htmlFor="distance">Пройдено км
